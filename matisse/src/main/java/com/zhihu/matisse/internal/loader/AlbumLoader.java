@@ -72,14 +72,11 @@ public class AlbumLoader extends CursorLoader {
 
     private static final String BUCKET_ORDER_BY = "datetaken DESC";
 
-    private OnAlbumContentChangedListener mListener;
-
-    private AlbumLoader(Context context, String selection, String[] selectionArgs,OnAlbumContentChangedListener listener) {
+    private AlbumLoader(Context context, String selection, String[] selectionArgs) {
         super(context, QUERY_URI, PROJECTION, selection, selectionArgs, BUCKET_ORDER_BY);
-        mListener = listener;
     }
 
-    public static CursorLoader newInstance(Context context, OnAlbumContentChangedListener listener) {
+    public static CursorLoader newInstance(Context context) {
         String selection;
         String[] selectionArgs;
         if (SelectionSpec.getInstance().onlyShowImages()) {
@@ -92,7 +89,7 @@ public class AlbumLoader extends CursorLoader {
             selection = SELECTION;
             selectionArgs = SELECTION_ARGS;
         }
-        return new AlbumLoader(context, selection, selectionArgs, listener);
+        return new AlbumLoader(context, selection, selectionArgs);
     }
 
     @Override
@@ -118,12 +115,5 @@ public class AlbumLoader extends CursorLoader {
     @Override
     public void onContentChanged() {
         // FIXME a dirty way to fix loading multiple times
-        if (mListener != null) {
-            mListener.onAlbumContentChanged();
-        }
-    }
-
-    public interface OnAlbumContentChangedListener {
-        void onAlbumContentChanged();
     }
 }

@@ -14,10 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<resources
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation"
-    >
+<resources>
     <string name="album_name_all">Alle Medien</string>
 
     <string name="button_preview">Vorschau</string>
